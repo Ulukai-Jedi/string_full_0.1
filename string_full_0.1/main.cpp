@@ -6,17 +6,31 @@ bool isCapital(const char karakter) {
 	return (karakter >= 'A' && karakter <= 'Z');
 }
 
+bool isLower(const char karakter) {
+	return (karakter >= 'a' && karakter <= 'z');
+}
+
 bool isWhitespace(const char karakter) {
 	return karakter == ' ' || karakter == '\t';
 }
 
-void csere(std::string& szoveg, const int mettol, const int meddig) {
+void csere1(std::string& szoveg, const int mettol, const int meddig) {
 	for (int i = mettol; i < meddig; i++) {
 		if (isCapital(szoveg[i])) {
 			szoveg[i] += 32;
 		}
 	}
 }
+
+void csere2(std::string& szoveg, const int mettol, const int meddig) {
+	for (int i = mettol; i < meddig; i++) {
+		if (isLower(szoveg[i])) {
+			szoveg[i] -= 32;
+		}
+	}
+}
+
+
 //új feladat, hogy kicsirõl nagyra is tudja cserélni!
 int main() {
 	std::string szoveg;
@@ -26,7 +40,9 @@ int main() {
 	if (szoveg.empty()) {
 		return 1;
 	}
-	int elozoszovege = 0;
+	csere2(szoveg, 0, szoveg.size());
+	std::cout << szoveg;
+	/*int elozoszovege = 0;
 	char response;
 	szoveg.push_back(' ');
 	for (int i = 0; i < szoveg.length(); i++) {
@@ -36,7 +52,7 @@ int main() {
 				std::cin >> response;
 				//AZ ELEJE ÉS A VÉGE NAGYON FONTOS ÉS NECCES!
 				if (response == 'Y' || response == 'y') {
-					csere(szoveg, elozoszovege, i);
+					csere1(szoveg, elozoszovege, i);
 				}
 			}
 			//karbantartás, találtam egy új szót, akkor az aktuális helyre kell ezt a változót dobni, vagy fogja magát és kiírogatja az eddigieket
@@ -46,5 +62,5 @@ int main() {
 	
 	std::cout << szoveg;
 
-	return 0;
+	return 0;*/
 }
